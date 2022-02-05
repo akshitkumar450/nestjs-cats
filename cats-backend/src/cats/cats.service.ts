@@ -47,4 +47,13 @@ export class CatsService {
       throw new NotFoundException(`no cat in range ${age_lte} and ${age_gte}`);
     return cat;
   }
+
+  //   Partial<CatsNew>  will ensure that the data to be updated in having fields from Cat Entity (either all,some or none)
+  async updateCat(id: number, attributesToUpdate: Partial<CatsNew>) {
+    const cat = await this.catsRepo.findOne(id);
+    // console.log(cat, attributesToUpdate);
+    // this will copy the values of  attributesToUpdate to cat (overwriting the values)
+    Object.assign(cat, attributesToUpdate);
+    return this.catsRepo.save(cat);
+  }
 }
