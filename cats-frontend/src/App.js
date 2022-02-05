@@ -31,12 +31,16 @@ function App() {
   }, []);
   const add = async (e) => {
     e.preventDefault();
-    const data = await axios.post("http://localhost:3000/cats", {
-      age: catAge,
-      name: catName,
-      breed,
-      image,
-    });
+    try {
+      const data = await axios.post("http://localhost:3000/cats", {
+        age: catAge,
+        name: catName,
+        breed,
+        image,
+      });
+    } catch (err) {
+      console.log(err.response.data.message[0]);
+    }
   };
 
   const deletePost = async (item) => {
@@ -51,9 +55,10 @@ function App() {
     e.preventDefault();
     try {
       const data = await axios.get(`http://localhost:3000/cats/${name}`);
-      setSingleCat(data.data);
+      setSingleCat(data.data[0]);
     } catch (err) {
-      alert(`cat with given name ${err.response.data}`);
+      // console.log(err.response);
+      alert(`cat with given name ${err.response.data.message}`);
     }
   };
 
@@ -128,10 +133,10 @@ function App() {
       {singleCat && (
         <div className="single">
           <h4>
-            {singleCat.Name} {singleCat.Age}
+            {singleCat.name} {singleCat.age}
           </h4>
           <div>
-            <img src={singleCat.Image} height="200" width="200" alt="" />
+            <img src={singleCat.image} height="200" width="200" alt="" />
           </div>
         </div>
       )}
