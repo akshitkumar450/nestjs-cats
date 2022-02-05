@@ -34,8 +34,8 @@ export class CatsService {
     return this.catsRepo.remove(catToBeDeleted);
   }
 
-  async findByMinMax(query) {
-    const { age_lte, age_gte } = query;
+  async findByMinMax(age_gte: number, age_lte: number) {
+    // const { age_lte, age_gte } = query;
     // console.log(+age_lte, +age_gte);
     const cat = await this.catsRepo
       .createQueryBuilder()

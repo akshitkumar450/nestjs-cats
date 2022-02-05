@@ -17,9 +17,12 @@ export class CatsController {
   constructor(private catsService: CatsService) {}
 
   @Get('/search?')
-  getByMinMax(@Query() query) {
-    // console.log(query);
-    return this.catsService.findByMinMax(query);
+  getByMinMax(
+    @Query('age_gte') age_gte: string,
+    @Query('age_lte') age_lte: string,
+  ) {
+    // console.log(age_gte, age_lte);
+    return this.catsService.findByMinMax(parseInt(age_gte), parseInt(age_lte));
   }
   @Get('/')
   getAllCats() {
