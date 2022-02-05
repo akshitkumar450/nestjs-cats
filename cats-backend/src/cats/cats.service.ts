@@ -33,4 +33,18 @@ export class CatsService {
       throw new NotFoundException(`cat to be deleted with id${id} not found`);
     return this.catsRepo.remove(catToBeDeleted);
   }
+
+  async findByMinMax(query) {
+    const { age_lte, age_gte } = query;
+    // console.log(+age_lte, +age_gte);
+    const cat = await this.catsRepo
+      .createQueryBuilder()
+      .select('*')
+      .where(`age BETWEEN ${+age_lte} AND ${+age_gte}`)
+      .getRawMany();
+    // console.log(cat);
+    if (cat.length === 0)
+      throw new NotFoundException(`no cat in range ${age_lte} and ${age_gte}`);
+    return cat;
+  }
 }

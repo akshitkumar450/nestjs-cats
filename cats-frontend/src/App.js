@@ -66,15 +66,13 @@ function App() {
     e.preventDefault();
     try {
       const data = await axios.get(
-        `http://localhost:3000/cats/search?age_lte=${+min}&age_gte=${+max}`
+        `http://localhost:3000/cats/search?age_lte=${min}&age_gte=${max}`
       );
       console.log(data);
       setByAge(data.data);
     } catch (err) {
       // console.log(err.response);
-      alert(
-        `cat with given age in between ${min} -${max} ${err.response.data}`
-      );
+      alert(`cat with given age in between ${err.response.data.message}`);
     }
   };
   // console.log(posts);
@@ -166,11 +164,11 @@ function App() {
           <div key={byAge.id}>
             <div>
               <h4>
-                {byAge.Name} {byAge.Age}
+                {byAge.name} {byAge.age}
               </h4>
             </div>
             <div>
-              <img src={byAge.Image} height="200" width="200" alt="" />
+              <img src={byAge.image} height="200" width="200" alt="" />
             </div>
           </div>
         ))}
