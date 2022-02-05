@@ -1,0 +1,42 @@
+input {
+  display: block;
+  /* width: 35%; */
+  margin: 10px;
+  height: 30px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form > div {
+  display: flex;
+}
+button {
+  background-color: green;
+  color: white;
+  outline: none;
+  border: 0;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+}
+.single > div {
+  display: grid;
+  place-items: center;
+}
+.multiple {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.multiple > div {
+  border: 1px solid lightgray;
+  margin: 10px;
+}
