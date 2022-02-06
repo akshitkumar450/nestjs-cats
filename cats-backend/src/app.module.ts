@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsNew } from './cats/cats.entity';
 import { CatsModule } from './cats/cats.module';
+import { Users } from './users/users.entity';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -23,11 +25,12 @@ import { CatsModule } from './cats/cats.module';
           database: config.get<string>('DB_NAME'),
           // synchronize: true,
           password: config.get<string>('DB_PASSWORD'),
-          entities: [CatsNew],
+          entities: [CatsNew, Users],
         };
       },
     }),
     CatsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [
