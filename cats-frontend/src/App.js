@@ -145,13 +145,13 @@ function App() {
         <div>
           <input
             type="text"
-            placeholder="min age(not included)"
+            placeholder="min age(included)"
             value={min}
             onChange={(e) => setMin(e.target.value)}
           />
           <input
             type="text"
-            placeholder="max age(not included)"
+            placeholder="max age(included)"
             value={max}
             onChange={(e) => setMax(e.target.value)}
           />

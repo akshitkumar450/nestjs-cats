@@ -7,7 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from './users.entity';
 import * as bcrypt from 'bcrypt';
-
+import * as jwt from 'jsonwebtoken';
 @Injectable()
 export class UsersService {
   constructor(@InjectRepository(Users) private usersRepo: Repository<Users>) {}
@@ -32,6 +32,25 @@ export class UsersService {
     if (!isMatch) {
       throw new NotFoundException('email or password do not match');
     }
+    const token = jwt.sign(
+      {
+        userId: user.id,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '2h',
+      },
+    );
+    return { ...user, token };
+  }
+
+  async findById(id: number) {
+    const user = await this.usersRepo.findOne(+id);
+    if (!user) throw new NotFoundException(`no user found with ${id} email`);
     return user;
+  }
+
+  async findAll() {
+    return this.usersRepo.find();
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateUserDto } from './DTO/create-user.dto';
 import { SignInUserDto } from './DTO/signin-user.dto';
 import { UsersService } from './users.service';
@@ -17,5 +17,15 @@ export class UsersController {
   loginUser(@Body() body: SignInUserDto) {
     const { email, password } = body;
     return this.usersSerive.signIn(email, password);
+  }
+
+  @Get('/:id')
+  findById(@Param('id') id: string) {
+    return this.usersSerive.findById(parseInt(id));
+  }
+
+  @Get('/')
+  findAll() {
+    return this.usersSerive.findAll();
   }
 }
