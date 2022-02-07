@@ -7,11 +7,13 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from 'src/users/guards/auth.guard';
 import { CatsService } from './cats.service';
 import { CreateCatsDto } from './DTO/create-cats.dto';
 import { UpdateCatDto } from './DTO/update-cat.dto';
-
+@UseGuards(AuthGuard)
 @Controller('cats')
 export class CatsController {
   constructor(private catsService: CatsService) {}

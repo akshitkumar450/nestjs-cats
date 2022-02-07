@@ -39,8 +39,8 @@ export class UsersController {
     // user is the current logged in user
     return user;
   }
+
   @UseGuards(AuthGuard)
-  @UseInterceptors(CurrentUserInterceptor)
   @Get('/:id')
   findById(@Param('id') id: string) {
     return this.usersSerive.findById(parseInt(id));
