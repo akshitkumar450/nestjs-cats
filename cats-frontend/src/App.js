@@ -24,7 +24,7 @@ function App() {
         console.log(data.data);
         setPosts(data.data);
       } catch (err) {
-        console.log(err.message);
+        alert(err.response.data.message);
       }
     };
     fetchData();
